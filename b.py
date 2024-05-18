@@ -37,7 +37,7 @@ def main():
     for a in circles:
         for b in circles:
             if lies_inside(a, b):
-                circles[a].append(b)
+                circles[a].add(b)
                 rev_circles[b].append(a)
 
     res = 0
