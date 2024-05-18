@@ -3,7 +3,7 @@ def lies_inside(a, b):
     # checks wether b is inside a
     x0, y0, r0 = a
     x1, y1, r1 = b
-    return sqrt((x0 - x1) ** 2 - (y0 - y1) ** 2) + r1 < r0
+    return ((x0 - x1) ** 2 - (y0 - y1) ** 2)**0.5 + r1 < r0
 
 def choose(n, k):
     return factorial(n) // factorial(k) // factorial(n - k)
@@ -43,3 +43,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# не работает вот пример ввода
+# 10 5
+# 0 0 100
+# 0 0 90
+# 0 0 80
+# 0 0 50
+# 10 0 4
+# 0 0 5
+# 0 0 4
+# 0 0 3
+# 0 0 2
+# 0 0 1
