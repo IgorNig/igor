@@ -8,20 +8,20 @@ def lies_inside(a, b):
 def choose(n, k):
     return factorial(n) // factorial(k) // factorial(n - k)
 
-def dfs(a, circles, k, depth=0, ancestors=[]):
+def dfs(a, circles, rev_circles, k, depth=0, ancestors=set()):
     depth += 1
 
-    ancestors.append(a)
+    ancestors.add(a)
     res = 0
     if depth >= k:
         res += choose(k - 1, depth - 1)
 
 
-    for child, parents in circles[a].items():
-        if sorted(parents) == sorted(ancestors):
+    for child in circles[a]:
+        if rev_circles == ancestors:
             res += dfs(child, circles, depth)
 
-    ancestors.pop()
+    ancestors.remove(a)
 
     return res
     
@@ -32,7 +32,7 @@ def main():
     rev_circles = {}
     for i in range(n):
         x, y, r = map(int, input().split())
-        circles[(x, y, r)] = []
+        circles[(x, y, r)] = set()
 
     for a in circles:
         for b in circles:
@@ -43,7 +43,7 @@ def main():
     res = 0
     for c, backwards_edges in rev_circles.items():
         if not backwards_edges:
-            res += dfs(c, circles, k)
+            res += dfs(c, circles, k, 0, set())
     print(res)
 
 
